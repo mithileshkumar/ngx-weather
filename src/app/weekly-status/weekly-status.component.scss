@@ -1,0 +1,35 @@
+.weather-week {
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 190px;
+        padding: 20px;
+        overflow: auto;
+    }
+
+    &__day {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 130px;
+        padding: 20px;
+    }
+
+    &__day:hover {
+        border: solid #87CEEB;
+        cursor: pointer;
+    }
+
+    &__icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    &__details {
+        text-align: center;
+    }
+
+}

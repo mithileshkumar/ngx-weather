@@ -1,0 +1,25 @@
+<div class='weather-search__container'>
+    <div class='weather-search__input-box'>
+        <input type='text' class='weather-search__input' (input)='onSearch($event)' />
+    </div>
+    
+    <ul class='weather-search__dropdown' *ngIf='userInput.length > 0'>
+        <li *ngFor='let city of cityList; trackBy: trackItem'>
+            <div class='weather-search__container-left'>
+                <span class='weather-search__city-name'><strong>{{ city.name }},&nbsp;</strong></span>
+                <span class='weather-search__city-state'>{{ city.state }}</span>
+            </div>
+            <div class='weather-search__container-right'>
+                <div class='weather-search__container-inner'>
+                    <div class='weather-search__city-temp'>
+                        <strong>{{ city.temp }} &#176; {{ 'C' }}</strong>
+                    </div>
+                    <div class='weather-search__city-weather'>{{ city.weather }}</div>
+                </div>
+                <div class='weather-search__city-icon'>
+                    <img alt='weather icon' class='weather-search__icon' src='{{ city.icon }}' />
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

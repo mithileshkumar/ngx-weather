@@ -1,0 +1,14 @@
+<div class='weather-week__container'>
+    <div class='weather-week__day' *ngFor='let weatherStatus of weeklyStatusList'>
+        <div class='weather-week__details'>
+            <strong>{{ weatherStatus?.day }}</strong>
+        </div>
+        <div class='weather-week__details'>
+            <strong>{{ weatherStatus?.max }}&#176;</strong>&nbsp;{{ weatherStatus?.min }}&#176;
+        </div>
+        <div class='weather-week__details'>
+            <img [src]='weatherStatus.icon' class='weather-week__icon' />
+        </div>
+        <div class='weather-week__details'>{{ weatherStatus?.weather }}</div>
+    </div>
+</div>

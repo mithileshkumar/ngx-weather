@@ -1,0 +1,66 @@
+.weather-search {
+    &__container {
+        height: auto;
+    }
+
+    &__input {
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        border-color: transparent;
+        box-shadow: 1px 1px 5px 5px #dddddd;
+        background: url('../../assets/icons/location.png') no-repeat scroll 7px 7px;
+        padding-left: 30px;
+        background-size: 20px;
+
+    }
+
+    &__dropdown {
+        width: 100%;
+        max-height: 200px;
+        overflow: auto;
+        border-radius: 5px;
+        border-color: transparent;
+        box-shadow: 1px 1px 5px 5px #dddddd;
+        z-index: 2;
+
+        li {
+            height: 60px;
+            padding: 10px;
+            border-bottom: 1px solid #dddddd;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        li:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__container-right {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 20px;
+    }
+
+    &__container-left {
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    &__city-icon {
+        max-width: 50px;
+    }
+
+    &__container-inner {
+        display: flex;
+        flex-direction: column;
+        max-width: 80px;
+    }
+
+    &__icon {
+        width: 40px;
+        height: 40px;
+    }
+}

@@ -1,0 +1,84 @@
+.weather-daily {
+
+    &__detailed {
+        width: 100%;
+        height: calc(100% - 230px);
+        border-radius: 5px;
+        border-color: transparent;
+        box-shadow: 1px 1px 5px 5px #dddddd;
+        padding: 20px;
+    }
+
+    &__icon {
+        width: 60px;
+        height: 60px;
+        margin-left: 80px;
+    }
+
+    &__temp {
+        font-size: 80px;
+        font-weight: 900;
+    }
+
+    &__row {
+        height: 80px;
+    }
+
+    &__atm-row {
+        height: 80px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__sun-row {
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__humid-container,
+    &__pressure-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #E3EFF9;
+        max-width: 200px;
+        border-radius: 5px;
+    }
+
+    &__humid-label,
+    &__pressure-label,
+    &__sunrise-label,
+    &__sunset-label {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    &__humid-value,
+    &__pressure-value,
+    &__sunrise-value,
+    &__sunset-value {
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+    }
+
+    &__sunrise-container,
+    &__sunset-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 200px;
+        border-radius: 5px;
+    }
+}
+
+highcharts-chart {
+    height: auto;
+    width: 100%;
+    display: block;
+}

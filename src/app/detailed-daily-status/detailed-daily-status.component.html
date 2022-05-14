@@ -1,0 +1,31 @@
+<div class='weather-daily__detailed'>
+    <div class='weather-daily__row'>
+        <span class='weather-daily__temp'>{{ currentDetails?.temp }} &#176;{{ 'C' }}</span>
+        <img alt='weather icon' class='weather-daily__icon' src='{{ currentDetails?.icon }}' />
+    </div>
+
+    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions">
+    </highcharts-chart>
+
+    <div class='weather-daily__atm-row'>
+        <div class='weather-daily__pressure-container'>
+            <span class='weather-daily__pressure-label'><strong>Pressure</strong></span>
+            <span class='weather-daily__pressure-value'>{{ currentDetails?.pressure }} {{ 'hpa' }}</span>
+        </div>
+        <div class='weather-daily__humid-container'>
+            <span class='weather-daily__humid-label'><strong>Humidity</strong></span>
+            <span class='weather-daily__humid-value'>{{ currentDetails?.humidity }}{{ '%' }}</span>
+        </div>
+    </div>
+
+    <div class='weather-daily__sun-row'>
+        <div class='weather-daily__sunrise-container'>
+            <span class='weather-daily__sunrise-label'><strong>Sunrise</strong></span>
+            <span class='weather-daily__sunrise-value'>{{ currentDetails?.sunrise | date:'HH:mm a' | lowercase }}</span>
+        </div>
+        <div class='weather-daily__sunset-container'>
+            <span class='weather-daily__sunset-label'><strong>Sunset</strong></span>
+            <span class='weather-daily__sunset-value'>{{ currentDetails?.sunset | date:'HH:mm a' | lowercase}}</span>
+        </div>
+    </div>
+</div>
