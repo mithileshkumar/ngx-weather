@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 // Internal files 
 import { getIcon, getday } from './utils/icons-path';
 import { WeatherGeolocationService } from './services/weather-geolocation.service';
+import { ICoordinates, initialCoordinates } from './app';
 
 @Component({
   selector: 'app-root',
@@ -15,23 +16,23 @@ export class AppComponent implements OnInit {
   weeklyData: any;
   hourlyData: any;
   title = 'ngx-weather';
-  coordinates: any;
+  coordinates: ICoordinates = initialCoordinates;
   currentSelection: number = 0;
 
   constructor(private locationService: WeatherGeolocationService) { }
 
   ngOnInit() {
-    this.locationService.getLocation().subscribe((data: any) => {
+    this.locationService.getLocation().subscribe((data: ICoordinates) => {
       this.coordinates = {
-        latitude: data.lat,
-        longitude: data.lon,
+        latitude: data.latitude,
+        longitude: data.longitude,
         timestamp: data.timestamp
       };
       this.getMoreDetails(this.coordinates);
     });
   }
 
-  getMoreDetails(coords: any) {
+  getMoreDetails(coords: ICoordinates) {
     this.locationService.getDetails(coords).subscribe((data: any) => {
       this.weeklyData = this.getWeeklyData(data);
       this.updateCurrentData(data.current);
@@ -39,13 +40,13 @@ export class AppComponent implements OnInit {
   }
 
   getWeeklyData(data: any) {
-    const updatedWeeklyData = data.daily.map((x: any) => {
+    const updatedWeeklyData = data.daily.map((weather: any) => {
       const weeklyData = Object.create(null);
-      weeklyData.date = new Date(x.dt * 1000);
+      weeklyData.date = new Date(weather.dt * 1000);
       weeklyData.day = getday(weeklyData.date.getDay());
-      weeklyData.max = Math.round(x.temp.max);
-      weeklyData.min = Math.round(x.temp.min);
-      weeklyData.weather = x.weather[0].main;
+      weeklyData.max = Math.round(weather.temp.max);
+      weeklyData.min = Math.round(weather.temp.min);
+      weeklyData.weather = weather.weather[0].main;
       weeklyData.icon = getIcon(weeklyData.weather);
       return weeklyData;
     });
