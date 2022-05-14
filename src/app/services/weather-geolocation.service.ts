@@ -6,25 +6,25 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class WeatherGeolocationService {
-  private key = 'fb1212de3f4341c33ef69a4d01e6aec9';
+  private key: string = 'fb1212de3f4341c33ef69a4d01e6aec9';
   coordinates: any;
+
   constructor(private http: HttpClient) { }
 
 
   getLocation(): Observable<any> {
     return new Observable(obs => {
       navigator.geolocation.getCurrentPosition(
-        success => {
-          const cod = {
+        (success) => {
+          const updatedCoords = {
             lat: success.coords.latitude,
             lon: success.coords.longitude,
             timestamp: success.timestamp
-
           }
-          obs.next(cod);
+          obs.next(updatedCoords);
           obs.complete();
         },
-        error => {
+        (error) => {
           obs.next({ lat: 10, lon: 20, timestamp: 1652533130485 });
           obs.complete();
         }

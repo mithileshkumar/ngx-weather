@@ -1,6 +1,7 @@
 // Angular modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 // Third party modules
@@ -23,6 +24,7 @@ import { WeeklyStatusComponent } from './components/weekly-status/weekly-status.
   imports: [
     AppRoutingModule,
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     HighchartsChartModule
   ],

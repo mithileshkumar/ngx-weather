@@ -1,5 +1,8 @@
 // Angular package
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+// Third party package
+import { debounceTime, Subject, Subscription } from 'rxjs';
 
 // Internal files
 import { cityStateList } from '../../utils/city-state-list';
@@ -11,14 +14,26 @@ import { SearchbarService } from './searchbar.service';
   templateUrl: './searchbar.component.html',
   styleUrls: ['./searchbar.component.scss'],
 })
-export class SearchbarComponent {
+export class SearchbarComponent implements OnInit, OnDestroy {
   cityList: any;
+  inputSubscription$: Subscription[] = [];
   userInput: string = '';
+  userInputSearch = '';
+  userInputUpdate = new Subject<string>();
 
   constructor(public searchbarService: SearchbarService) { }
 
-  onSearch(inputEvent: any): void {
-    this.userInput = inputEvent.target.value.trim().toLowerCase();
+  ngOnInit(): void {
+    const inputSubscription$ = this.userInputUpdate.pipe(
+      debounceTime(400))
+      .subscribe((userValue: string) => {
+        this.onSearch(userValue);
+      });
+    this.inputSubscription$.push(inputSubscription$);
+  }
+
+  onSearch(userValue: string): void {
+    this.userInput = userValue.trim().toLowerCase();
     this.cityList = cityStateList.filter((currentCity: any) => {
       return currentCity.name.toLowerCase().startsWith(this.userInput);
     });
@@ -43,6 +58,14 @@ export class SearchbarComponent {
 
   trackItem(index: number, item: any) {
     return item.id;
+  }
+
+  onClickSearch(clickEvent: any) {
+    console.log(clickEvent.currentTarget.value);
+  }
+
+  ngOnDestroy(): void {
+    this.inputSubscription$.forEach(currentSubscription => currentSubscription.unsubscribe());
   }
 
 }
