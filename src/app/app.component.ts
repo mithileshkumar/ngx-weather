@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 
 // Internal files 
-import { getIcon, getday } from '../utils/icons-path';
-import { WeatherGeolocationService } from './weather-geolocation.service';
+import { getIcon, getday } from './utils/icons-path';
+import { WeatherGeolocationService } from './services/weather-geolocation.service';
 
 @Component({
   selector: 'app-root',

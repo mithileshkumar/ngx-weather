@@ -9,9 +9,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
 // Internal files
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DetailedDailyStatusComponent } from './detailed-daily-status/detailed-daily-status.component';
-import { SearchbarComponent } from './searchbar/searchbar.component';
-import { WeeklyStatusComponent } from './weekly-status/weekly-status.component';
+import { DetailedDailyStatusComponent } from './components/detailed-daily-status/detailed-daily-status.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { WeeklyStatusComponent } from './components/weekly-status/weekly-status.component';
 
 @NgModule({
   declarations: [
