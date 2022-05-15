@@ -40,6 +40,7 @@ export const bellChart: Highcharts.Options = {
         text: ''
     },
     xAxis: [{
+        categories: ['6am', '1pm', '8pm'],
         title: {
             text: ''
         },
@@ -52,7 +53,6 @@ export const bellChart: Highcharts.Options = {
         opposite: true,
         visible: false
     }],
-
     yAxis: [{
         title: { text: '' },
         visible: false
@@ -61,7 +61,6 @@ export const bellChart: Highcharts.Options = {
         opposite: true,
         visible: false
     }],
-
     series: [{
         name: 'Sunlight',
         type: 'bellcurve',
@@ -76,7 +75,7 @@ export const bellChart: Highcharts.Options = {
         showInLegend: false,
         name: 'Data',
         type: 'scatter',
-        data: [3.5, 4],
+        data: [3.5, 4, 8],
         accessibility: {
             exposeAsGroupOnly: true
         },
