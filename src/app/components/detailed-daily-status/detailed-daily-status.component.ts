@@ -3,8 +3,11 @@ import { Component, Input, OnChanges } from '@angular/core';
 
 // Third party package
 import * as Highcharts from 'highcharts';
+import  Bellcurve from 'highcharts/modules/histogram-bellcurve';
+Bellcurve(Highcharts);
 
 // Internal files
+import { bellChart, lineChart } from '../../utils/chart';
 import { ICurrentWeatherDetails, initialCurrentWeatherDetails } from './detailed-daily-status';
 @Component({
   selector: 'app-detailed-daily-status',
@@ -13,30 +16,8 @@ import { ICurrentWeatherDetails, initialCurrentWeatherDetails } from './detailed
 })
 export class DetailedDailyStatusComponent implements OnChanges {
   Highcharts: typeof Highcharts = Highcharts;
-  chartOptions: Highcharts.Options = {
-    chart: {
-      height: 200
-    },
-    credits: {
-      enabled: false
-    },
-    series: [{
-      marker: {
-        fillColor: '#FFFFFF',
-        lineWidth: 2,
-        lineColor: '#7CB5EC'
-      },
-      showInLegend: false,
-      data: [1, 2, 3],
-      type: 'line'
-    }],
-    title: {
-      text: ''
-    },
-    yAxis: [{
-      visible: false
-    }]
-  };
+  lineChartOptions: Highcharts.Options = lineChart;
+  bellChartOptions: Highcharts.Options = bellChart;
   currentDetails: ICurrentWeatherDetails = {
     temp: 0,
     icon: '',

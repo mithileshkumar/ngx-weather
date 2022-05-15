@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 })
 export class SearchbarService {
 
-  private key = environment.apiKey;
+  private key = environment.connectCode;
 
   constructor(private http: HttpClient) { }
 

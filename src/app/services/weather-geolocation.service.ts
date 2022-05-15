@@ -10,7 +10,7 @@ import { ICoordinates, initialCoordinates } from '../app';
   providedIn: 'root'
 })
 export class WeatherGeolocationService {
-  private key: string = environment.apiKey;
+  private key: string = environment.connectCode;
   coordinates: any;
 
   constructor(private http: HttpClient) { }

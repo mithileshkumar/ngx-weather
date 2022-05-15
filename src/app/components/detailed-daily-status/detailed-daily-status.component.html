@@ -4,7 +4,7 @@
         <img alt='weather icon' class='weather-daily__icon' src='{{ currentDetails?.icon }}' />
     </div>
 
-    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions">
+    <highcharts-chart [Highcharts]="Highcharts" [options]="lineChartOptions">
     </highcharts-chart>
 
     <div class='weather-daily__atm-row'>
@@ -28,4 +28,7 @@
             <span class='weather-daily__sunset-value'>{{ currentDetails?.sunset | date:'HH:mm a' | lowercase}}</span>
         </div>
     </div>
+
+    <highcharts-chart [Highcharts]="Highcharts" [options]="bellChartOptions">
+    </highcharts-chart>
 </div>
