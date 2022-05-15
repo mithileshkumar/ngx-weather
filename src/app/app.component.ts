@@ -1,6 +1,9 @@
 // Angular package
 import { Component, OnInit } from '@angular/core';
 
+// Third party package
+import { NgxSpinnerService } from 'ngx-spinner';
+
 // Internal files 
 import { getIcon, getday } from './utils/icons-path';
 import { WeatherGeolocationService } from './services/weather-geolocation.service';
@@ -12,6 +15,7 @@ import { ICoordinates, initialCoordinates } from './app';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  typeSelected: string;
   currentData: any;
   weeklyData: any;
   hourlyData: any;
@@ -19,9 +23,13 @@ export class AppComponent implements OnInit {
   coordinates: ICoordinates = initialCoordinates;
   currentSelection: number = 0;
 
-  constructor(private locationService: WeatherGeolocationService) { }
+  constructor(private locationService: WeatherGeolocationService,
+    private spinnerService: NgxSpinnerService) {
+    this.typeSelected = 'ball-fussion';
+  }
 
   ngOnInit() {
+    this.spinnerService.show();
     this.locationService.getLocation().subscribe((data: ICoordinates) => {
       this.coordinates = {
         latitude: data.latitude,
@@ -29,13 +37,18 @@ export class AppComponent implements OnInit {
         timestamp: data.timestamp
       };
       this.getMoreDetails(this.coordinates);
+    }, (err) => {
+      this.spinnerService.hide();
     });
   }
 
   getMoreDetails(coords: ICoordinates) {
     this.locationService.getDetails(coords).subscribe((data: any) => {
+      this.spinnerService.hide();
       this.weeklyData = this.getWeeklyData(data);
       this.updateCurrentData(data.current);
+    }, (err) => {
+      this.spinnerService.hide();
     });
   }
 
@@ -48,6 +61,8 @@ export class AppComponent implements OnInit {
       weeklyData.min = Math.round(weather.temp.min);
       weeklyData.weather = weather.weather[0].main;
       weeklyData.icon = getIcon(weeklyData.weather);
+      weeklyData.latitude = weather.lat;
+      weeklyData.longitude = weather.lon;
       return weeklyData;
     });
     return updatedWeeklyData;

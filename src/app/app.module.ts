@@ -1,8 +1,10 @@
 // Angular modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner'; // TODO: use own implementation instead of package
 
 // Third party modules
 import { HighchartsChartModule } from 'highcharts-angular';
@@ -24,9 +26,11 @@ import { WeeklyStatusComponent } from './components/weekly-status/weekly-status.
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,11 @@
 <main class='weather-main__container'>
 
+  <ngx-spinner [type]="typeSelected">
+    <p class='weather-main__loading'> Loading... </p>
+  </ngx-spinner>
+
   <!-- Component allowing to search as well as show data there itself -->
-  <app-searchbar>
+  <app-searchbar (updateCurrentCityDetails)='getMoreDetails($event)'>
   </app-searchbar>
 
   <!-- Component showing weeks minimum and maximum temp with icons -->

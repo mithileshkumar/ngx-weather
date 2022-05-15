@@ -12,7 +12,8 @@ export class SearchbarService {
 
   constructor(private http: HttpClient) { }
 
-  getSearchedDetails(city: string) {
+   // fetch data using name
+   getCityWeatherDetails(city: string) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.key}`;
     return this.http.get(url);
   }

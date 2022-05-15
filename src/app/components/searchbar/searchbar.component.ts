@@ -1,5 +1,5 @@
 // Angular package
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 
 // Third party package
 import { debounceTime, Subject, Subscription } from 'rxjs';
@@ -15,6 +15,9 @@ import { SearchbarService } from './searchbar.service';
   styleUrls: ['./searchbar.component.scss'],
 })
 export class SearchbarComponent implements OnInit, OnDestroy {
+
+  @Output('updateCurrentCityDetails') updateCurrentCityDetails = new EventEmitter();
+
   cityList: any;
   inputSubscription$: Subscription[] = [];
   userInput: string = '';
@@ -34,11 +37,14 @@ export class SearchbarComponent implements OnInit, OnDestroy {
 
   onSearch(userValue: string): void {
     this.userInput = userValue.trim().toLowerCase();
+    if (this.userInput === '') {
+      return;
+    }
     this.cityList = cityStateList.filter((currentCity: any) => {
       return currentCity.name.toLowerCase().startsWith(this.userInput);
     });
     this.cityList.forEach((currData: any) => {
-      this.searchbarService.getSearchedDetails(currData.name.toLowerCase()).subscribe((data) => {
+      this.searchbarService.getCityWeatherDetails(currData.name.toLowerCase()).subscribe((data) => {
         this.cityList = this.cityList.map((currentCity: any) => {
           const updatedCityList = { ...currentCity };
           //@ts-ignore
@@ -47,7 +53,11 @@ export class SearchbarComponent implements OnInit, OnDestroy {
             updatedCityList.weather = data.weather[0].main;
             //@ts-ignore
             updatedCityList.temp = Math.round(data.main.temp);
-            updatedCityList.icon = getIcon(updatedCityList.weather)
+            updatedCityList.icon = getIcon(updatedCityList.weather);
+            //@ts-ignore
+            updatedCityList.latitude = data.coord.lat;
+            //@ts-ignore
+            updatedCityList.longitude = data.coord.lon;
           }
           return updatedCityList;
         })
@@ -61,7 +71,7 @@ export class SearchbarComponent implements OnInit, OnDestroy {
   }
 
   onClickSearch(clickEvent: any) {
-    console.log(clickEvent.currentTarget.value);
+    this.updateCurrentCityDetails.emit(clickEvent.currentTarget.dataset);
   }
 
   ngOnDestroy(): void {

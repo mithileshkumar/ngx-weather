@@ -3,4 +3,12 @@
         padding: 20px;
         height: 100%;
     }
+
+    &__loading {
+        text-align: center;
+        color: white;
+        margin-top: 300px;
+        font-size: 40px;
+        font-weight: 900;
+    }
 }

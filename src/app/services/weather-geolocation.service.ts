@@ -15,7 +15,6 @@ export class WeatherGeolocationService {
 
   constructor(private http: HttpClient) { }
 
-
   getLocation(): Observable<ICoordinates> {
     return new Observable(obs => {
       navigator.geolocation.getCurrentPosition(
