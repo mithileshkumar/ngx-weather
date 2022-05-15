@@ -20,17 +20,14 @@ export class WeeklyStatusComponent implements OnChanges {
 
   constructor() { }
 
-  ngOnInit() {
-    this.weatherDayStyles = {
-      'weather-week__day': true,
-      'weather-week__active': true,
-    };
-  }
-
   ngOnChanges(): void {
     this.weeklyStatusList = this.weeklyData;
   }
 
+  /**
+   * 
+   * @param id send id to parent to extract data after comparison and update
+   */
   onClickWeatherDay(id: number) {
     this.selectedDay = id;
     this.updateSelectedDay.emit(id.toString());

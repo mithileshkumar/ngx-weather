@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchbarComponent } from './searchbar.component';
 
+//TODO: add test cases
 describe('SearchbarComponent', () => {
   let component: SearchbarComponent;
   let fixture: ComponentFixture<SearchbarComponent>;

@@ -8,12 +8,16 @@ import { environment } from '../../../environments/environment';
 })
 export class SearchbarService {
 
-  private key = environment.connectCode;
+  private key: string = environment.connectCode;
 
   constructor(private http: HttpClient) { }
 
-   // fetch data using name
-   getCityWeatherDetails(city: string) {
+  /**
+   * 
+   * @param city selected city name
+   * @returns data received from openweather
+   */
+  getCityWeatherDetails(city: string) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.key}`;
     return this.http.get(url);
   }

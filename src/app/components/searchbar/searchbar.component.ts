@@ -26,6 +26,9 @@ export class SearchbarComponent implements OnInit, OnDestroy {
 
   constructor(public searchbarService: SearchbarService) { }
 
+  /**
+   * add delay of 5ms to avoid expensive network calls
+   */
   ngOnInit(): void {
     const inputSubscription$ = this.userInputUpdate.pipe(
       debounceTime(400))
@@ -35,6 +38,11 @@ export class SearchbarComponent implements OnInit, OnDestroy {
     this.inputSubscription$.push(inputSubscription$);
   }
 
+  /**
+   * 
+   * @param userValue input value entered by user
+   * @returns combined details of city searched
+   */
   onSearch(userValue: string): void {
     this.userInput = userValue.trim().toLowerCase();
     if (this.userInput === '') {
@@ -66,6 +74,12 @@ export class SearchbarComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   * 
+   * @param index iteration index of city list
+   * @param item list item from city list
+   * @returns id of city so that it can be updated on change
+   */
   trackItem(index: number, item: any) {
     return item.id;
   }

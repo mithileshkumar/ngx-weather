@@ -3,7 +3,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 
 // Third party package
 import * as Highcharts from 'highcharts';
-import  Bellcurve from 'highcharts/modules/histogram-bellcurve';
+import Bellcurve from 'highcharts/modules/histogram-bellcurve';
 Bellcurve(Highcharts);
 
 // Internal files
@@ -15,7 +15,10 @@ import { ICurrentWeatherDetails, initialCurrentWeatherDetails } from './detailed
   styleUrls: ['./detailed-daily-status.component.scss']
 })
 export class DetailedDailyStatusComponent implements OnChanges {
-  @Input('seriesData') seriesData = []; 
+
+  @Input('currentData') currentData: ICurrentWeatherDetails = initialCurrentWeatherDetails;
+  @Input('seriesData') seriesData = [];
+
   Highcharts: typeof Highcharts = Highcharts;
   lineChartOptions: Highcharts.Options = lineChart;
   bellChartOptions: Highcharts.Options = bellChart;
@@ -28,24 +31,27 @@ export class DetailedDailyStatusComponent implements OnChanges {
     sunset: 0
   };
 
-  @Input('currentData') currentData: ICurrentWeatherDetails = initialCurrentWeatherDetails;
-
   constructor() { }
 
+  /**
+   * update chart details for hourly data
+   */
   ngOnChanges(): void {
     this.currentDetails = this.currentData;
-    this.lineChartOptions = {...this.lineChartOptions, series: [
-      {
-        marker: {
+    this.lineChartOptions = {
+      ...this.lineChartOptions, series: [
+        {
+          marker: {
             fillColor: '#FFFFFF',
             lineWidth: 2,
             lineColor: '#7CB5EC'
-        },
-        showInLegend: false,
-        data: this.seriesData,
-        type: 'line'
-    }
-    ]};
+          },
+          showInLegend: false,
+          data: this.seriesData,
+          type: 'line'
+        }
+      ]
+    };
   }
 
 }

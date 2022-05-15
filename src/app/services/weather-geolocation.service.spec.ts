@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { WeatherGeolocationService } from './weather-geolocation.service';
 
+//TODO: add test cases
 describe('WeatherGeolocationService', () => {
   let service: WeatherGeolocationService;
 

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WeeklyStatusComponent } from './weekly-status.component';
 
+//TODO: add test cases
 describe('WeeklyStatusComponent', () => {
   let component: WeeklyStatusComponent;
   let fixture: ComponentFixture<WeeklyStatusComponent>;

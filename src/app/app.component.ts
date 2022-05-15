@@ -1,8 +1,9 @@
 // Angular package
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 // Third party package
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 
 // Internal files 
 import { getIcon, getday } from './utils/icons-path';
@@ -14,10 +15,11 @@ import { ICoordinates, initialCoordinates } from './app';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   currentData: any;
   coordinates: ICoordinates = initialCoordinates;
   currentSelection: number = 0;
+  inputSubscription$: Subscription[] = [];
   title = 'ngx-weather';
   typeSelected: string = '';
   updatedSeriesData = [];
@@ -28,10 +30,12 @@ export class AppComponent implements OnInit {
     private spinnerService: NgxSpinnerService) {
     this.typeSelected = 'ball-fussion';
   }
-
-  ngOnInit() {
+  /**
+   * toggle loading indicator before and after data is received;  also request for coordinates from user
+   */
+  ngOnInit(): void {
     this.spinnerService.show();
-    this.locationService.getLocation().subscribe((data: ICoordinates) => {
+    const coordinatesSubscription$ = this.locationService.getLocation().subscribe((data: ICoordinates) => {
       this.coordinates = {
         latitude: data.latitude,
         longitude: data.longitude,
@@ -41,10 +45,15 @@ export class AppComponent implements OnInit {
     }, (err) => {
       this.spinnerService.hide();
     });
+    this.inputSubscription$.push(coordinatesSubscription$);
   }
 
+  /**
+   * 
+   * @param coords city coordinates taken from webAPI or search selection
+   */
   getMoreDetails(coords: ICoordinates) {
-    this.locationService.getDetails(coords).subscribe((data: any) => {
+    const weatherSubscription$ = this.locationService.getDetails(coords).subscribe((data: any) => {
       this.weatherDataStore = data;
       this.spinnerService.hide();
       this.weeklyData = this.getWeeklyData(data, coords);
@@ -55,8 +64,15 @@ export class AppComponent implements OnInit {
     }, (err) => {
       this.spinnerService.hide();
     });
+    this.inputSubscription$.push(weatherSubscription$);
   }
 
+  /**
+   * 
+   * @param data current, hourly and weekly data received from openweather 
+   * @param coords city coordinates taken from webAPI or search selection
+   * @returns formatted bare minimum weekly data to be shown on charts
+   */
   getWeeklyData(data: any, coords: ICoordinates) {
     const updatedWeeklyData = data.daily.map((weather: any) => {
       const weeklyData = Object.create(null);
@@ -73,6 +89,10 @@ export class AppComponent implements OnInit {
     return updatedWeeklyData;
   }
 
+  /**
+   * 
+   * @param id used to compare current selection and extract data to update the detail section
+   */
   onUpdateDayData(id: string) {
     //@ts-ignore
     const currentDayDetails = this.weatherDataStore.daily.filter((currentData, index) => {
@@ -88,6 +108,11 @@ export class AppComponent implements OnInit {
     };
   }
 
+  /**
+   * 
+   * @param currData extracts pressure, humidity and other details for the current time 
+   * to be shown on the detailed section 
+   */
   updateCurrentData(currData: any) {
     this.currentData = {
       temp: Math.round(currData.temp),
@@ -97,6 +122,10 @@ export class AppComponent implements OnInit {
       sunrise: currData.sunrise,
       sunset: currData.sunset
     };
+  }
+
+  ngOnDestroy(): void {
+    this.inputSubscription$.forEach(currentSubscription => currentSubscription.unsubscribe());
   }
 
 }

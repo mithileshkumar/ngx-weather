@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailedDailyStatusComponent } from './detailed-daily-status.component';
 
+//TODO: add test cases
 describe('DetailedDailyStatusComponent', () => {
   let component: DetailedDailyStatusComponent;
   let fixture: ComponentFixture<DetailedDailyStatusComponent>;

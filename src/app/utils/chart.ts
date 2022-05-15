@@ -63,7 +63,7 @@ export const bellChart: Highcharts.Options = {
     }],
 
     series: [{
-        name: 'Bell curve',
+        name: 'Sunlight',
         type: 'bellcurve',
         xAxis: 1,
         yAxis: 1,
