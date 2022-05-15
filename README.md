@@ -2,6 +2,28 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
 
+# Hosted location
+
+Without location propmt as it's not having secure connection (http://rionzz.com)
+With location prompt (https://unique-fairies.surge.sh)
+
+# Important notice
+
+Highcharts is a paid service. Used it for fun as development. Will be removing it ASAP or use it's paid service or use a free charting package.
+
+# Troubleshooting
+
+Please search cities immediately or it will trigger thousands of API and since free subscription is being used; account may get locked.
+THough delay/debouncing has been applied to minize this behavior.
+
+# To do
+
+There are aspects of improvement which couldn't be achieved due to time crunch.
+Sun chart could be made dynamic.
+Input placeholder update of cities in edge cases which is missing as of now.
+Icon for search in input box.
+Better loading indicator without third package library.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
