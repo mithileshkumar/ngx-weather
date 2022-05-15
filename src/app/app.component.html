@@ -9,7 +9,7 @@
   </app-searchbar>
 
   <!-- Component showing weeks minimum and maximum temp with icons -->
-  <app-weekly-status [weeklyData]='weeklyData'>
+  <app-weekly-status [weeklyData]='weeklyData' (updateSelectedDay)='onUpdateDayData($event)'>
   </app-weekly-status>
 
   <!-- Component showing humidity, pressure, graphs etc. -->

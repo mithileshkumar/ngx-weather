@@ -1,5 +1,6 @@
 <div class='weather-week__container'>
-    <div class='weather-week__day' *ngFor='let weatherStatus of weeklyStatusList'>
+    <div [ngClass]="selectedDay === i ? 'weather-week__active': 'weather-week__day'" 
+         *ngFor='let weatherStatus of weeklyStatusList; let i = index' (click)='onClickWeatherDay(i)'>
         <div class='weather-week__details'>
             <strong>{{ weatherStatus?.day }}</strong>
         </div>

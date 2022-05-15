@@ -15,10 +15,10 @@ import { ICoordinates, initialCoordinates } from './app';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  typeSelected: string;
+  weatherDataStore = [];
+  typeSelected: string = '';
   currentData: any;
   weeklyData: any;
-  hourlyData: any;
   title = 'ngx-weather';
   coordinates: ICoordinates = initialCoordinates;
   currentSelection: number = 0;
@@ -44,15 +44,16 @@ export class AppComponent implements OnInit {
 
   getMoreDetails(coords: ICoordinates) {
     this.locationService.getDetails(coords).subscribe((data: any) => {
+      this.weatherDataStore = data;
       this.spinnerService.hide();
-      this.weeklyData = this.getWeeklyData(data);
+      this.weeklyData = this.getWeeklyData(data, coords);
       this.updateCurrentData(data.current);
     }, (err) => {
       this.spinnerService.hide();
     });
   }
 
-  getWeeklyData(data: any) {
+  getWeeklyData(data: any, coords: ICoordinates) {
     const updatedWeeklyData = data.daily.map((weather: any) => {
       const weeklyData = Object.create(null);
       weeklyData.date = new Date(weather.dt * 1000);
@@ -61,11 +62,26 @@ export class AppComponent implements OnInit {
       weeklyData.min = Math.round(weather.temp.min);
       weeklyData.weather = weather.weather[0].main;
       weeklyData.icon = getIcon(weeklyData.weather);
-      weeklyData.latitude = weather.lat;
-      weeklyData.longitude = weather.lon;
+      weeklyData.latitude = coords.latitude;
+      weeklyData.longitude = coords.longitude;
       return weeklyData;
     });
     return updatedWeeklyData;
+  }
+
+  onUpdateDayData(id: string) {
+    //@ts-ignore
+    const currentDayDetails = this.weatherDataStore.daily.filter((currentData, index) => {
+      return index.toString() === id;
+    });
+    this.currentData = {
+      temp: Math.round(currentDayDetails[0].temp.day),
+      icon: getIcon(currentDayDetails[0].weather[0].main.toLowerCase()),
+      pressure: currentDayDetails[0].pressure,
+      humidity: currentDayDetails[0].humidity,
+      sunrise: currentDayDetails[0].sunrise,
+      sunset: currentDayDetails[0].sunset
+    };
   }
 
   updateCurrentData(currData: any) {

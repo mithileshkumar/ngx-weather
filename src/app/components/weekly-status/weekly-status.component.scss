@@ -9,7 +9,19 @@
         overflow: auto;
     }
 
+    &__active {
+        border: solid hsl(197, 71%, 73%);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 130px;
+        padding: 10px 20px;
+    }
+
     &__day {
+        border: none;
         display: flex;
         justify-content: center;
         align-items: center;
