@@ -12,11 +12,17 @@ export const lineChart: Highcharts.Options = {
             lineColor: '#7CB5EC'
         },
         showInLegend: false,
-        data: [1, 2, 3],
+        data: [],
         type: 'line'
     }],
     title: {
         text: ''
+    },
+    xAxis: {
+        type: 'datetime',
+        labels: {
+            autoRotation: [-1]
+        }
     },
     yAxis: [{
         visible: false

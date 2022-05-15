@@ -15,6 +15,7 @@ import { ICurrentWeatherDetails, initialCurrentWeatherDetails } from './detailed
   styleUrls: ['./detailed-daily-status.component.scss']
 })
 export class DetailedDailyStatusComponent implements OnChanges {
+  @Input('seriesData') seriesData = []; 
   Highcharts: typeof Highcharts = Highcharts;
   lineChartOptions: Highcharts.Options = lineChart;
   bellChartOptions: Highcharts.Options = bellChart;
@@ -33,6 +34,18 @@ export class DetailedDailyStatusComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.currentDetails = this.currentData;
+    this.lineChartOptions = {...this.lineChartOptions, series: [
+      {
+        marker: {
+            fillColor: '#FFFFFF',
+            lineWidth: 2,
+            lineColor: '#7CB5EC'
+        },
+        showInLegend: false,
+        data: this.seriesData,
+        type: 'line'
+    }
+    ]};
   }
 
 }

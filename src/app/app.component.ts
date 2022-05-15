@@ -15,13 +15,14 @@ import { ICoordinates, initialCoordinates } from './app';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  weatherDataStore = [];
-  typeSelected: string = '';
   currentData: any;
-  weeklyData: any;
-  title = 'ngx-weather';
   coordinates: ICoordinates = initialCoordinates;
   currentSelection: number = 0;
+  title = 'ngx-weather';
+  typeSelected: string = '';
+  updatedSeriesData = [];
+  weatherDataStore = [];
+  weeklyData: any;
 
   constructor(private locationService: WeatherGeolocationService,
     private spinnerService: NgxSpinnerService) {
@@ -47,6 +48,9 @@ export class AppComponent implements OnInit {
       this.weatherDataStore = data;
       this.spinnerService.hide();
       this.weeklyData = this.getWeeklyData(data, coords);
+      this.updatedSeriesData = data.hourly.map((hourlyData: any) => {
+        return [hourlyData.dt, hourlyData.temp];
+      });
       this.updateCurrentData(data.current);
     }, (err) => {
       this.spinnerService.hide();
