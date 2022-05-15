@@ -19,6 +19,7 @@ export class SearchbarComponent implements OnInit, OnDestroy {
   @Output('updateCurrentCityDetails') updateCurrentCityDetails = new EventEmitter();
 
   cityList: any;
+  hideShowSearchList: boolean = false;
   inputSubscription$: Subscription[] = [];
   userInput: string = '';
   userInputSearch = '';
@@ -44,8 +45,10 @@ export class SearchbarComponent implements OnInit, OnDestroy {
    * @returns combined details of city searched
    */
   onSearch(userValue: string): void {
+    this.hideShowSearchList = true;
     this.userInput = userValue.trim().toLowerCase();
     if (this.userInput === '') {
+      this.hideShowSearchList = false;
       return;
     }
     this.cityList = cityStateList.filter((currentCity: any) => {
@@ -86,6 +89,7 @@ export class SearchbarComponent implements OnInit, OnDestroy {
 
   onClickSearch(clickEvent: any) {
     this.updateCurrentCityDetails.emit(clickEvent.currentTarget.dataset);
+    this.hideShowSearchList = false;
   }
 
   ngOnDestroy(): void {

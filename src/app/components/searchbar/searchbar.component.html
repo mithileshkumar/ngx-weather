@@ -1,10 +1,10 @@
 <div class='weather-search__container'>
     <div class='weather-search__input-box'>
         <input type='text' class='weather-search__input' (ngModelChange)="this.userInputUpdate.next($event)"
-            [(ngModel)]="userInputSearch"/>
+            [(ngModel)]="userInputSearch" [placeholder]='userInputSearch' />
     </div>
     <!-- TODO: discuss need to trade of speed for memory if we want to use event propagation -->
-    <ul class='weather-search__dropdown' *ngIf='userInput.length > 0'>
+    <ul class='weather-search__dropdown' *ngIf='hideShowSearchList'>
         <li *ngFor='let city of cityList; trackBy: trackItem' (click)='onClickSearch($event)'
             [attr.data-latitude]='city.latitude' [attr.data-longitude]='city.longitude'>
             <div class='weather-search__container-left'>
