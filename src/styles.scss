@@ -4,4 +4,19 @@
     box-sizing: border-box;
     width: 100%;
     height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    overflow: auto;
+}
+
+.font-gray {
+    color: gray;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; // make scrollbar transparent
+    scrollbar-color: #0A4C95 #C2D2E4; // firefox transparent
 }

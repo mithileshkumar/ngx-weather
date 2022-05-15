@@ -8,11 +8,17 @@
         height: 40px;
         border-radius: 5px;
         border-color: transparent;
+        outline-color: transparent;
         box-shadow: 1px 1px 5px 5px #dddddd;
         background: url('../../../assets/icons/location.png') no-repeat scroll 7px 7px;
         padding-left: 30px;
         background-size: 20px;
 
+    }
+
+    &__input:focus {
+        border-color: #89cfeb;
+        outline-color: #89cfeb;
     }
 
     &__dropdown {
@@ -49,8 +55,20 @@
         padding-right: 10px;
     }
 
+    &__search-icon {
+        margin-top: -30px;
+        margin-right: 10px;
+        float: right;
+        width: 20px;
+        height: 20px;
+    }
+
     &__city-icon {
         max-width: 50px;
+    }
+
+    &__city-weather {
+        font-size: 12px;
     }
 
     &__container-inner {
@@ -62,5 +80,16 @@
     &__icon {
         width: 40px;
         height: 40px;
+    }
+}
+
+@media only screen and (max-width: 365px) {
+    .weather-search__container-right {
+        padding-right: 0;
+    }
+
+    .weather-search__icon {
+        width: 30px;
+        height: 30px;
     }
 }

@@ -2,6 +2,7 @@
     <div class='weather-search__input-box'>
         <input type='text' class='weather-search__input' (ngModelChange)="this.userInputUpdate.next($event)"
             [(ngModel)]="userInputSearch" [placeholder]='userInputSearch' />
+        <img class='weather-search__search-icon' src='../../../assets/icons/search.png' alt='search-icon' />
     </div>
     <!-- TODO: discuss need to trade of speed for memory if we want to use event propagation -->
     <ul class='weather-search__dropdown' *ngIf='hideShowSearchList'>
@@ -9,14 +10,14 @@
             [attr.data-latitude]='city.latitude' [attr.data-longitude]='city.longitude'>
             <div class='weather-search__container-left'>
                 <span class='weather-search__city-name'><strong>{{ city.name }},&nbsp;</strong></span>
-                <span class='weather-search__city-state'>{{ city.state }}</span>
+                <span class='weather-search__city-state font-gray'>{{ city.state }}</span>
             </div>
             <div class='weather-search__container-right'>
                 <div class='weather-search__container-inner'>
                     <div class='weather-search__city-temp'>
                         <strong>{{ city.temp }} &#176; {{ 'C' }}</strong>
                     </div>
-                    <div class='weather-search__city-weather'>{{ city.weather }}</div>
+                    <div class='weather-search__city-weather font-gray'>{{ city.weather }}</div>
                 </div>
                 <div class='weather-search__city-icon'>
                     <img alt='weather icon' class='weather-search__icon' src='{{ city.icon }}' />

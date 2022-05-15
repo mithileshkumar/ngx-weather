@@ -2,18 +2,22 @@
 
     &__container {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         height: 190px;
-        padding: 5px 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 10px;
         overflow: auto;
+        width: 100%;
+        margin-top: 10px;
     }
 
     &__active {
         border: solid hsl(197, 71%, 73%);
         cursor: pointer;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         flex-direction: column;
         width: 130px;
